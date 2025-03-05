@@ -1007,4 +1007,18 @@ function sendReply(originalMsgId, replyText) {
 
     chatMessages.appendChild(replyElement);
     chatMessages.scrollTop = chatMessages.scrollHeight; 
+
+    self.addEventListener('install', event => {
+    console.log('Service Worker Installed');
+});
+
+self.addEventListener('fetch', event => {
+    console.log('Fetching:', event.request.url);
+});
+
+    if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js')
+    .then(() => console.log('Service Worker Registered'));
+    }
+    
         </script>
