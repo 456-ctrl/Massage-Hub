@@ -1,0 +1,1009 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MassageHub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="app-header">
+        <h1>MassageHub</h1>
+        
+        <input type="text" id="searchInput" onkeyup="searchContacts()" placeholder="Search Contact (Comming soon)">
+
+        <button class="settings-button" onclick="openSettings()">⚙ Settings</button>
+    </header>
+
+    <!-- Contact List -->
+    <main class="contact-list" id="contact-list">
+        <!-- Contacts will appear here dynamically -->
+    </main>
+
+    <!-- Add Contact Section -->
+    <div class="add-contact">
+        <input type="text" id="new-contact" placeholder="Enter contact name">
+        <button onclick="addContact()">Add Contact</button>
+    </div>
+
+    <!-- Chat Window -->
+    <div class="chat-window" id="chat-window">
+        <header class="chat-header" id="chat-header">
+            <button onclick="closeChat()"><b>←</b></button>
+            <h3 id="chat-title">Chat</h3>
+        </header>
+        <input type="file" id="profilePicInput" accept="image/*" onchange="updateProfilePic()">
+        <div class="chat-messages" id="chat-messages"></div>
+        <div class="chat-input">
+        
+            <input type="text" id="message-input" placeholder="Type a message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <!-- Settings Section -->
+    <div class="settings" id="settings">
+        <header class="settings-header">
+            <button onclick="closeSettings()"><b>←</b></button>
+            <h2>Settings</h2>
+        </header>
+        <div class="settings-content">
+            <h3>Choose Theme</h3>
+            <button class="theme-button" onclick="changeTheme('default')">Default</button>
+            
+            <button class="theme-button" onclick="changeTheme('blue')">Blue</button>
+            <button class="theme-button" onclick="changeTheme('green')">Green</button>
+            <button class="theme-button" onclick="changeTheme('yellow')">Purple</button>
+            
+            <button class="theme-button" onclick="changeTheme('orange')">Orange</button>
+            
+
+            <!-- Privacy and Terms of Use Buttons -->
+            <h3>Legal</h3>
+            <button class="privacy-button" onclick="openPrivacyPolicy()">Privacy Policy</button>
+            <button class="terms-button" onclick="openTermsOfUse()">Terms of Use</button>
+        </div>
+    </div>
+
+    <!-- Privacy Policy Section -->
+    <div class="privacy-policy" id="privacy-policy">
+        <header class="privacy-header">
+            <button onclick="closePrivacyPolicy()"><b>←</b></button>
+            <h2>Privacy Policy</h2>
+        </header>
+        <div class="privacy-content">
+            <p>This is a sample privacy policy for MassageHub. Your data and privacy are important to us.</p>
+            <p>We do not collect or share your personal information without your consent.</p>
+            <p>For more details, please contact <b>support@massagehub.com.</b></p>
+        </div>
+    </div>
+
+    <!-- Terms of Use Section -->
+    <div class="terms-of-use" id="terms-of-use">
+        <header class="terms-header">
+            <button onclick="closeTermsOfUse()"><b>←</b></button>
+            <h2>Terms of Use</h2>
+        </header>
+        <div class="terms-content">
+            <p>Welcome to MassageHub! By using this app, you agree to the following terms:</p>
+            <ul>
+                <li>You will not misuse the app for illegal activities.</li>
+                <li>You are responsible for your account and actions.</li>
+                <li>We reserve the right to modify or terminate services at any time.</li>
+            </ul>
+            <p>If you have any questions, please contact <b>support@massagehub.com.</b></p>
+        </div>
+    </div>
+
+    <footer class="app-footer">
+        <button  onclick="myFunction()">Chats</button>
+                <button onclick="youFunction()">Updates</button>
+                <button onclick="kyFunction()">Communities</button>
+                <button onclick="jyFunction()">Calls</button>
+        
+        
+    </footer>
+<br>
+<br>
+<br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><hr>
+<div class="profile-container">
+    <label for="profilePicInput">
+        <img id="profilePic" src="avatar.png" alt="ProfilePicture ">
+    </label>
+    <input type="file" id="profilePicInput" accept="image/*" onchange="updateProfilePic()">
+</div>
+<hr>
+
+    </select>
+</div>
+
+    <script src="script.js"></script>
+</body>
+</html><style>body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+.app-header {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    background-color: #25d366;
+    color: white;
+    padding: 10px;
+}
+
+.search-bar {
+    width: 90%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    background-color: lightgreen;
+}
+
+.contact-list {
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.contact {
+    display: flex;
+    align-items: left;
+    justify-content: space-between;
+    background-color: white;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.contact-name {
+    font-weight: bold;
+}
+
+.chat-window {
+    display: none;
+    flex-direction: column;
+    height: 100vh;
+    background-color: red;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    
+}
+
+.chat-header {
+  
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: blue;
+    color: white;
+}
+
+.back-button{
+  background-color: blue;
+}
+  
+  
+
+.chat-messages {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    background-color: #f5f5f5;
+}
+
+.chat-input {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    background-color: white;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.chat-input button {
+    background-color: blue;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.app-footer {
+    display: flex;
+    justify-content: space-between;
+    background-color: #ffffff;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid #ddd;
+}
+
+.footer-button {
+    flex: 1;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 14px;
+    border: 9px;
+    background: blue;
+    cursor: pointer;
+}
+
+.footer-button.active {
+    color: pink;
+    font-weight: bold;
+}
+/* Add Contact Form Styling */
+.add-contact {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+}
+
+.add-contact input {
+    flex: 1;
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.add-contact button {
+    padding: 10px;
+    background-color: blue;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+/* Settings Section */
+.settings {
+    display: none;
+    position: fixed;
+ 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    z-index: 100;
+    flex-direction: column;
+}
+
+.settings-header {
+    padding: 10px;
+    background-color: blue;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+.settings-header button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.settings-content {
+    padding: 20px;
+}
+
+.settings-content p {
+    margin: 10px 0;
+}
+
+/* Settings Button */
+.settings-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+}
+/* Default Theme */
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    color: #000;
+    margin: 0;
+    padding: 0;
+}
+
+/* Dark Theme */
+body.dark {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+/* Blue Theme */
+body.blue {
+    background-color: #e3f2fd;
+    color: #0d47a1;
+}
+
+/* Green Theme */
+body.green {
+    background-color: #e8f5e9;
+    color: #1b5e20;
+    
+}
+/* Yellow Theme */
+body.yellow {
+    background-color: #fffde7;
+    color: #f57f17;
+}
+
+/* Yellow  Theme */
+body.yellow {
+    background-color: #f3e5f5;
+    color: #6a1b9a;
+}
+
+/* Orange Theme */
+body.orange {
+    background-color: #fff3e0;
+    color: #e65100;
+}
+
+/* Settings Buttons */
+.theme-button {
+    padding: 10px;
+    margin: 10px 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: blue;
+    color: white;
+    font-size: 16px;
+}
+
+.theme-button:hover {
+    opacity: 0.9;
+}
+
+/* Other styles remain same */
+/* Privacy Policy Section */
+.privacy-policy {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    z-index: 100;
+    flex-direction: column;
+}
+
+.privacy-header {
+    padding: 10px;
+    background-color: blue;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+.privacy-header button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.privacy-content {
+    padding: 20px;
+}
+
+.privacy-content p {
+    margin: 10px 0;
+}
+
+/* Privacy Button */
+.privacy-button {
+    padding: 10px;
+    margin: 10px 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: blue;
+    color: #fff;
+    font-size: 16px;
+}
+/* Terms of Use Section */
+.terms-of-use {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    z-index: 100;
+    flex-direction: column;
+}
+
+.terms-header {
+    padding: 10px;
+    background-color: blue;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+.terms-header button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.terms-content {
+    padding: 20px;
+}
+
+.terms-content p, .terms-content ul {
+    margin: 10px 0;
+}
+
+.terms-content ul li {
+    margin-left: 20px;
+    list-style: disc;
+}
+
+/* Terms Button */
+.terms-button {
+    padding: 10px;
+    margin: 10px 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: blue;
+    color: #fff;
+    font-size: 16px;
+}
+/* Yellow  Theme */
+body.yellow {
+    background-color: #f3e5f5;
+    color: #6a1b9a;
+}/* Yellow  Theme */
+body.yellow {
+    background-color: #f3e5f5;
+    color: #6a1b9a;
+}
+
+.container {
+    display: flex;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+.section {
+    min-width: 100%;
+    transition: transform 0.3s ease-in-out;
+}
+
+.tab-content {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+}
+
+.tab-section {
+    min-width: 100%;
+    display: none;
+    padding: 20px;
+}
+
+/* Active Tab Show */
+.tab-section.active {
+    display: block;
+}
+
+/* Navigation Button Styling */
+.tab-button {
+    padding: 10px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 16px;
+    color: red;
+}
+
+.tab-button.active {
+    color: black;
+    font-weight: bold;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+#contactList li {
+    list-style: none;
+    padding: 10px;
+    font-size: 18px;
+    border-bottom: 1px solid #ddd;
+}
+
+.profile-container {
+    text-align: left;
+    margin: 1px;
+    position: right;
+    
+    
+}
+
+.profile-container img {
+    width: 50px;
+    height: 50px;
+    border-radius: 90%;
+    border: 2px solid #aaa;
+    cursor: pointer;
+}
+
+#profilePicInput {
+    display:none; /* File input को हाइड किया गया है */
+}
+
+.app-header {
+    display: flex;
+    align-items: left;
+    justify-content: space-between;
+    background-color: #ffffff;
+    color: lightgreen;
+    padding: 10px;
+}
+
+.header-left {
+    display: flex;
+    align-items: left;
+}
+
+.header-left img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 100px;
+    cursor: pointer;
+    border: 2px solid white;
+}
+
+.app-header {
+    display: flex;
+    align-items: left;
+    justify-content: space-between;
+    background-color: #ffffff;
+    color: blue; /* Lighter green color */
+    padding: 10px;
+}
+
+
+/* भेजे गए मैसेज (Right Side, Pink Color) */
+.sent-message {
+    background-color: pink;
+    color: black;
+    padding: 8px;
+    border-radius: 10px;
+    max-width: 70%;
+    align-self: flex-end; /* Right Side */
+    margin: 5px;
+}
+
+/* रिप्लाई मैसेज (Left Side, Light Green Color) */
+.reply-message {
+    background-color: lightblue;
+    color: black;
+    padding: 8px;
+    border-radius: 10px;
+    max-width: 70%;
+    align-self: flex-start; /* Left Side */
+    margin: 5px;
+}
+
+/* मैसेज बॉक्स स्टाइल */
+.message {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    
+    </style><script>let currentChat = null;
+
+// Initialize contacts array
+const contacts = [];
+
+// Function to add a new contact
+function addContact() {
+    const newContactName = document.getElementById("new-contact").value.trim();
+    if (newContactName) {
+        contacts.push(newContactName); // Add contact to the list
+        renderContacts(); // Update the contact list
+        document.getElementById("new-contact").value = ""; // Clear the input field
+    } else {
+        alert("Please enter a valid contact name.");
+    }
+}
+
+// Function to render contact list dynamically
+function renderContacts() {
+    const contactList = document.getElementById("contact-list");
+    
+    contacts.forEach(contact => {
+        const contactElement = document.createElement("div");
+        contactElement.classList.add("contact");
+        contactElement.innerHTML = `<div class="contact-name">${contact}</div>`;
+        contactElement.onclick = () => openChat(contact);
+        contactList.appendChild(contactElement);
+    });
+}
+
+// Function to open a chat window
+function openChat(contactName) {
+    currentChat = contactName;
+    document.getElementById("chat-title").innerText = contactName;
+    document.getElementById("contact-list").style.display = "none";
+    document.getElementById("chat-window").style.display = "flex";
+}
+
+// Function to close chat window
+function closeChat() {
+    currentChat = null;
+    document.getElementById("chat-window").style.display = "none";
+    document.getElementById("contact-list").style.display = "block";
+}
+
+// Function to send a message
+function sendMessage() {
+    const input = document.getElementById("message-input");
+    const message = input.value.trim();
+    if (message) {
+        const chatMessages = document.getElementById("chat-messages");
+        
+        // Add user's message
+        chatMessages.innerHTML += `<p><b>You:</b> ${message}</p>`;
+        input.value = "";
+        chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to the latest message
+
+        // Simulate a reply after 6 seconds
+        setTimeout(() => {
+            chatMessages.innerHTML += `<p><b>${currentChat}:</b> Thank you for your message!</p>`;
+            chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to the latest reply
+        }, 2000);
+    }
+}
+// Function to open settings
+function openSettings() {
+    document.getElementById("contact-list").style.display = "none";
+    document.getElementById("chat-window").style.display = "none";
+    document.getElementById("settings").style.display = "flex";
+}
+
+// Function to close settings
+function closeSettings() {
+    document.getElementById("settings").style.display = "none";
+    document.getElementById("contact-list").style.display = "block";
+}
+
+// Function to open privacy policy
+function openPrivacyPolicy() {
+    document.getElementById("settings").style.display = "none";
+    document.getElementById("privacy-policy").style.display = "flex";
+}
+
+// Function to close privacy policy
+function closePrivacyPolicy() {
+    document.getElementById("privacy-policy").style.display = "none";
+    document.getElementById("settings").style.display = "flex";
+}// Function to open settings
+function openSettings() {
+    document.getElementById("contact-list").style.display = "none";
+    document.getElementById("chat-window").style.display = "none";
+    document.getElementById("settings").style.display = "flex";
+}
+
+// Function to close settings
+function closeSettings() {
+    document.getElementById("settings").style.display = "none";
+    document.getElementById("contact-list").style.display = "block";
+}
+
+// Function to open privacy policy
+function openPrivacyPolicy() {
+    document.getElementById("settings").style.display = "none";
+    document.getElementById("privacy-policy").style.display = "flex";
+}
+
+// Function to close privacy policy
+function closePrivacyPolicy() {
+    document.getElementById("privacy-policy").style.display = "none";
+    document.getElementById("settings").style.display = "flex";
+}
+
+// Function to open terms of use
+function openTermsOfUse() {
+    document.getElementById("settings").style.display = "none";
+    document.getElementById("terms-of-use").style.display = "flex";
+}
+
+// Function to close terms of use
+function closeTermsOfUse() {
+    document.getElementById("terms-of-use").style.display = "none";
+    document.getElementById("settings").style.display = "flex";
+}
+
+function changeTheme(theme) {
+    // Remove all theme classes
+    document.body.classList.remove('default', 'dark', 'blue', 'green');
+    
+    // Add the selected theme class
+    document.body.classList.add(theme);
+}
+
+let currentIndex = 0;
+const sections = document.querySelectorAll(".section");
+const totalSections = sections.length;
+
+document.addEventListener("touchstart", handleTouchStart, false);
+document.addEventListener("touchmove", handleTouchMove, false);
+
+let xDown = null;
+
+function handleTouchStart(evt) {
+    xDown = evt.touches[0].clientX;
+}
+
+function handleTouchMove(evt) {
+    if (!xDown) return;
+
+    let xUp = evt.touches[0].clientX;
+    let xDiff = xDown - xUp;
+
+    if (xDiff > 0) {
+        // Swipe Left (Next Section)
+        if (currentIndex < totalSections - 1) {
+            currentIndex++;
+        }
+    } else {
+        // Swipe Right (Previous Section)
+        if (currentIndex > 0) {
+            currentIndex--;
+        }
+    }
+
+    updateView();
+    xDown = null;
+}
+
+function updateView() {
+    document.querySelector(".container").style.transform = `translateX(-${currentIndex * 100}%)`;
+}
+
+function openTab(tabName) {
+    // सभी tabs को hide करो
+    document.querySelectorAll('.tab-section').forEach(tab => {
+        tab.classList.remove('active');
+    });
+
+    // Selected tab को show करो
+    document.getElementById(tabName).classList.add('active');
+
+    // सभी buttons को inactive करो
+    document.querySelectorAll('.tab-button').forEach(button => {
+        button.classList.remove('active');
+    });
+
+    // Active button को highlight करो
+    document.querySelector(`[onclick="openTab('${tabName}')"]`).classList.add('active');
+}
+function searchContacts() {
+    let input = document.getElementById("searchInput").value.toLowerCase();
+    let contacts = document.querySelectorAll("#contactList li");
+
+    contacts.forEach(contact => {
+        if (contact.innerText.toLowerCase().includes(input)) {
+            contact.style.display = "block"; // Show matched contacts
+        } else {
+            contact.style.display = "none"; // Hide unmatched contacts
+        }
+    });
+}
+function updateProfilePic() {
+    let input = document.getElementById("profilePicInput");
+    let img = document.getElementById("profilePic");
+
+    if (input.files && input.files[0]) {
+        let reader = new FileReader();
+
+        reader.onload = function (e) {
+            img.src = e.target.result; // यूज़र द्वारा अपलोड की गई इमेज को शो करें
+        };
+
+        reader.readAsDataURL(input.files[0]); // इमेज को पढ़ें
+    }
+}
+
+function youFunction() {
+  alert("Comming Soon ...")
+}
+
+function kyFunction() {
+  alert("Coming Soon...")
+}
+
+function jyFunction() {
+  alert("Coming Soon ...")
+}
+
+
+function sendMessage() {
+    const input = document.getElementById("message-input");
+    const message = input.value.trim();
+
+    if (message) {
+        const chatMessages = document.getElementById("chat-messages");
+        const messageId = "msg-" + Date.now(); // यूनिक ID
+
+        // नया मैसेज ऐड करें
+        const messageElement = document.createElement("div");
+        messageElement.classList.add("message");
+        messageElement.id = messageId;
+        messageElement.innerHTML = `
+            <p class="text">${message}</p>
+            <button class="edit-btn" onclick="editMessage('${messageId}')">✏️ Edit</button>
+        `;
+
+        chatMessages.appendChild(messageElement);
+        input.value = "";
+        chatMessages.scrollTop = chatMessages.scrollHeight; // स्क्रॉल नीचे करें
+    }
+}
+
+function editMessage(msgId) {
+    let messageDiv = document.getElementById(msgId);
+    let textElement = messageDiv.querySelector('.text');
+
+    // इनपुट बॉक्स बनाएं
+    let input = document.createElement('input');
+    input.type = 'text';
+    input.value = textElement.textContent;
+
+    // सेव बटन
+    let saveBtn = document.createElement('button');
+    saveBtn.textContent = '✔ Save';
+    saveBtn.onclick = function () {
+        textElement.textContent = input.value;
+        messageDiv.removeChild(input);
+        messageDiv.removeChild(saveBtn);
+    };
+
+    // इनपुट और बटन ऐड करें
+    messageDiv.appendChild(input);
+    messageDiv.appendChild(saveBtn);
+}
+
+function sendMessage() {
+    const input = document.getElementById("message-input");
+    const message = input.value.trim();
+
+    if (message) {
+        const chatMessages = document.getElementById("chat-messages");
+        const messageId = "msg-" + Date.now(); // यूनिक ID
+
+        // नया मैसेज ऐड करें
+        const messageElement = document.createElement("div");
+        messageElement.classList.add("message");
+        messageElement.id = messageId;
+        messageElement.innerHTML = `
+            <p class="text">${message}</p>
+            <button class="reply-btn" onclick="replyMessage('${messageId}')">↩ Reply</button>
+        `;
+
+        chatMessages.appendChild(messageElement);
+        input.value = "";
+        chatMessages.scrollTop = chatMessages.scrollHeight; // स्क्रॉल नीचे करें
+
+        // ऑटो रिप्लाई भेजें
+        setTimeout(() => {
+            sendReply(messageId, `Reply to: ${message}`);
+        }, 2000);
+    }
+}
+function editReply(replyMsgId) {
+    let replyDiv = document.getElementById(replyMsgId);
+    let textElement = replyDiv.querySelector('.text');
+
+    // इनपुट बॉक्स बनाएं
+    let input = document.createElement('input');
+    input.type = 'text';
+    input.value = textElement.textContent;
+
+    // सेव बटन
+    let saveBtn = document.createElement('button');
+    saveBtn.textContent = '✔ Save';
+    saveBtn.onclick = function () {
+        textElement.textContent = input.value;
+        replyDiv.removeChild(input);
+        replyDiv.removeChild(saveBtn);
+    };
+
+    // इनपुट और बटन ऐड करें
+    replyDiv.appendChild(input);
+    replyDiv.appendChild(saveBtn);
+}
+
+
+function sendMessage() {
+    const input = document.getElementById("message-input");
+    const message = input.value.trim();
+
+    if (message) {
+        const chatMessages = document.getElementById("chat-messages");
+        const messageId = "msg-" + Date.now(); // यूनिक ID
+
+        // नया मैसेज ऐड करें
+        const messageElement = document.createElement("div");
+        messageElement.classList.add("message", "sent-message"); // Pink & Right Side
+        messageElement.id = messageId;
+        messageElement.innerHTML = `
+            <p class="text">${message}</p>
+            <button class="reply-btn" onclick="replyMessage('${messageId}')">↩</button>
+        `;
+
+        chatMessages.appendChild(messageElement);
+        input.value = "";
+        chatMessages.scrollTop = chatMessages.scrollHeight; // स्क्रॉल नीचे करें
+
+        // ऑटो रिप्लाई भेजें
+        setTimeout(() => {
+            sendReply(messageId, `Reply to: ${message}`);
+        }, 2000);
+    }
+}
+
+function sendReply(originalMsgId, replyText) {
+    const chatMessages = document.getElementById("chat-messages");
+    const replyMsgId = "reply-" + Date.now(); // यूनिक ID
+
+    // रिप्लाई मैसेज ऐड करें
+    const replyElement = document.createElement("div");
+    replyElement.classList.add("message", "reply-message"); // Light Green & Left Side
+    replyElement.id = replyMsgId;
+    replyElement.innerHTML = `
+        <p class="text">${replyText}</p>
+        <button class="edit-btn" onclick="editReply('${replyMsgId}')">✏️</button>
+    `;
+
+    chatMessages.appendChild(replyElement);
+    chatMessages.scrollTop = chatMessages.scrollHeight; 
+        </script>
